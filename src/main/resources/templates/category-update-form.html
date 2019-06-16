@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragment/link}"></th:block>
+</head>
+<body>
+<div class="main" style="min-height: 650px">
+<!--Replace fragment for header-->
+<div id="div-header" class="my-5" th:replace="~{fragment/ajax-fragment :: header1}"></div>
+
+<h1 style="margin-top: 100px" class="text-center">Update Category</h1>
+
+<div class="container">
+
+    <form action="/category/update" method="post" th:object="${category}">
+
+        <label for="id" th:text="#{id-text}">ID :</label>
+        <input readonly class="form-control" type="text" id="id" th:field="*{idCatagory}"> <br>
+
+        <label for="title" th:text="#{title-text}">Title :</label> <span style="color:red" th:text="#{title-error}"
+                                                                         th:if="${#fields.hasErrors()}">wqdq</span>
+        <input class="form-control" type="text" id="title" th:field="*{nameCatagory}"><br>
+
+        <input type="submit" th:value="#{update-text}" class="btn btn-yellow">
+        <a th:href="@{/}" class="btn btn-secondary" th:text="#{back-text}">back</a>
+
+    </form>
+
+</div>
+
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.0/js/mdb.min.js"></script>
+</div>
+</body>
+
+<!--    Replace fragment for footer -->
+<div id="div-footer" style=" bottom: 0 ;width: 100%; " th:insert="~{fragment/ajax-fragment :: footer1}"></div>
+
+</html>

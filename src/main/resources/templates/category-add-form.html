@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <th:block th:insert="~{fragment/link}"> </th:block>
+
+</head>
+<body>
+<div class="main" style="min-height: 600px">
+
+<!--Replace  fragment for header -->
+<div th:replace="fragment/ajax-fragment :: header1">
+
+</div>
+
+<div class="container " style="margin-top: 100px">
+
+    <h1 class="text-center" th:text="#{add-article-title}">Add Data</h1>
+
+    <form action="/category/add" method="post"  th:object="${category}">
+
+        <label for="id" th:text="#{id-text}">ID :</label>
+        <input class="form-control" type="text" id="id" th:value="*{idCatagory}" th:field="*{idCatagory}" readonly><br>
+        <label for="title" th:text="#{category-text}">Title :</label> <span style="color: red;" th:if="${#fields.hasErrors()}" th:text="#{title-error}">Invaled Title</span>
+        <input class="form-control" type="text" id="title" th:field="*{nameCatagory}"><br>
+
+        <div style="margin-bottom:50px;">
+            <input type="submit" th:value="#{add-text}"  class="btn btn-green">
+            <a th:href="@{/}" class="btn btn-secondary" th:text="#{back-text}">back</a>
+        </div>
+    </form>
+</div>
+
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"
+        type="text/javascript"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.0/js/mdb.min.js"></script>
+
+</div>
+</body>
+
+<!--    Replace fragment for footer -->
+<div id="div-footer" style="bottom: 0 ;width: 100%" th:insert="~{fragment/ajax-fragment :: footer1}"></div>
+
+</html>
+
+
+

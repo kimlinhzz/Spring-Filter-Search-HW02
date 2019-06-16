@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragment/link}"></th:block>
+</head>
+<body>
+
+<!--    Replace fragment for header -->
+<div id="div-header" class="my-5" th:replace="~{fragment/ajax-fragment :: header1}"></div>
+
+<h1 style="margin-top: 100px" class="text-center">View</h1>
+
+<div class="container">
+
+    <form th:object="${article}">
+
+        <label for="id" th:text="#{id-text}">ID:</label>
+        <input readonly class="form-control" type="text" id="id" th:field="*{id}"><br>
+        <label for="title" th:text="#{title-text}">Title</label>
+        <input class="form-control" id="title" readonly th:field="*{title}" type="text"><br>
+        <label for="author" th:text="#{article}">Author:</label>
+        <input readonly class="form-control" type="text" id="author" th:field="*{aurthor}"><br>
+        <label for="des" th:text="#{description}">Description:</label>
+        <input readonly class="form-control" type="text" id="des" th:field="*{description}"><br>
+        <lable th:text="#{thumbnail-text}">qwdq</lable>
+        <img style="width:180px; height: 130px; margin: 30px" th:src="'/thumnail/'+*{thumnail}">
+        <a class="btn btn-secondary" th:href="@{/}" th:text="#{back-text}">back</a>
+
+    </form>
+</div>
+
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.0/js/mdb.min.js"></script>
+</body>
+
+<!--    Replace fragment for footer -->
+
+<div id="div-footer" style="bottom: 0;width: 100%" th:insert="~{fragment/ajax-fragment :: footer1}"></div>
+</html>
