@@ -19,16 +19,16 @@
         <form action="/get" method="Get" id="search" style="margin-top: 100px;" th:object="${article}">
 
             <div class=" form-inline">
-                <input type="text" id="name" style="width: 40%" th:placeholder="#{search-text}" class="form-control"
-                       th:field="*{title}">
-                <button class="btn   cyan "
+                <input type="text" id="name" style="width: 40%" th:placeholder="#{search-text}"  class="form-control"
+                       th:value="${ tempSearch==null }?  null : ${tempSearch}" name="title">
+                <button class="btn cyan "
                         type="submit"><i class="fas fa-search"></i></button>
                 <select id="cate" class="form-control ml-5" style="width: 40%;" onchange="onChange()"
-                        th:field="*{catagory.idCatagory}">
+                        name="catagory.idCatagory">
                     <option th:text="#{filter-text}" th:value="0"></option>
                     <option th:each="cate : ${categories}" th:value="${cate.idCatagory}"
                             th:text="${cate.nameCatagory}"
-                            th:selected="${cate.nameCatagory}==${article.catagory.nameCatagory}"></option>
+                            th:selected="${cate.nameCatagory}==${tempFilter}"></option>
                 </select>
 
             </div>

@@ -1,6 +1,4 @@
 package com.example.demo.controller;
-
-
 import com.example.demo.model.Article;
 import com.example.demo.model.Catagory;
 import com.example.demo.service.ArticleService.ArticleService;
@@ -46,10 +44,16 @@ public class MainController {
     }
 
     @GetMapping("/get")
-    public String getBySearch(ModelMap modelMap,@ModelAttribute Article article ){
-        System.out.println(categoryService.findAll() + "hello");
-        System.out.println("Search"+article. getCatagory().getIdCatagory());
+    public String getBySearch(ModelMap modelMap,@ModelAttribute Article article){
+//        System.out.println(categoryService.findAll() + "hello");
+
+        modelMap.addAttribute("tempSearch",article.getTitle());
+        if(article.getCatagory().getIdCatagory()>0) {
+            modelMap.addAttribute("tempFilter", categoryService.getCatagory(article.getCatagory().getIdCatagory()).getNameCatagory());
+        }
         viewPage(modelMap, 1, 10,article.getCatagory().getIdCatagory(),article.getTitle());
+//        System.out.println("Search"+categoryService.getCatagory(article.getCatagory().getIdCatagory()).getNameCatagory());
+//        System.out.println("bello"+article.getTitle());
         return "index";
     }
 
@@ -154,11 +158,13 @@ public class MainController {
         if (page > ArticleServiceImp.lastPage) {
             page = 1;
         }
-
+        Article article = new Article();
+        article.setTitle(searchText);
         modelMap.addAttribute("articles", articleService.findAll());
         //TODO Must Check Category Input Again And Imp Search Dynamic Also Filter;
         modelMap.addAttribute("categories",categoryService.findAll());
         modelMap.addAttribute("article",new Article());
+
         modelMap.addAttribute("articlePage", articleService.showByPagination(page, limit,idSearch,searchText));
         modelMap.addAttribute("currentPage", ArticleServiceImp.currentPage);
         modelMap.addAttribute("totalPage", ArticleServiceImp.lastPage);
