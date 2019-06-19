@@ -15,8 +15,10 @@
 
     <form action="/add" method="post" enctype="multipart/form-data" th:object="${article}">
 
-        <label for="id" th:text="#{id-text}+':'">ID :</label>
-        <input class="form-control" type="text" id="id" th:value="*{id}" readonly><br>
+        <label style="display: none" for="id" th:text="#{id-text}+':'">ID :</label>
+        <input  style="display: none"  class="form-control" type="text" id="id" th:value="*{id}" readonly><br>
+
+
         <label for="title" th:text="#{title-text}+':'">Title :</label> <span style="color: red;"
                                                                          th:if="${#fields.hasErrors('title')}"
                                                                          th:text="#{title-error}">Invaled Title</span>

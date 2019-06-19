@@ -12,8 +12,8 @@
 <div class="container">
 
     <form th:object="${article}">
-        <label for="id" th:text="#{id-text}">ID:</label>
-        <input readonly class="form-control" type="text" id="id" th:field="*{id}"><br>
+        <label for="id" style="display: none" th:text="#{id-text}">ID:</label>
+        <input readonly class="form-control" style="display: none" type="text" id="id" th:field="*{id}"><br>
         <label for="title" th:text="#{title-text}">Title</label>
         <input class="form-control" id="title" readonly th:field="*{title}" type="text"><br>
         <label for="author" th:text="#{article}">Author:</label>
