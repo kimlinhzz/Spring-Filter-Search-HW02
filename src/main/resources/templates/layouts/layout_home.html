@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <th:block th:insert="~{fragment/link}"> </th:block>
+</head>
+<style>
+    body{
+        font-family:Georgia,Arial, Bro;
+        font-size: 28px;
+    }
+
+</style>
+<body>
+
+<div id="div-header" class="my-5" th:replace="~{fragment/ajax-fragment :: header1}"></div>
+
+
+<div layout:fragment="content"></div>
+
+<div id="div-footer" style="bottom: 0 ;width: 100%" th:insert="~{fragment/ajax-fragment :: footer1}"></div>
+
+</body>
+<script>
+
+
+    function changeLanguage(language) {
+        var currentUrl = location.pathname+location.search;
+        if (currentUrl.indexOf("?") == -1){
+            location.href = currentUrl+"?lang="+language;
+        }else {
+            if (currentUrl.indexOf("?lang") != -1) {
+                location.href = currentUrl.split("?lang", 1) + "?lang=" + language;
+            } else if (currentUrl.indexOf("&lang") != -1) {
+                location.href = currentUrl.split("&lang", 1) + "&lang=" + language;
+            }else {
+                location.href = currentUrl + "&lang=" + language;
+            }
+        }
+    }
+</script>
+</html>

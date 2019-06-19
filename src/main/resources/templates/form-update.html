@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <th:block th:insert="~{fragment/link}"></th:block>
-</head>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layout_home.html}">
+
 <body>
 
-<!--Replace fragment for header-->
-<div id="div-header" class="my-5" th:replace="~{fragment/ajax-fragment :: header1}"></div>
+<div class="main" style="min-height: 650px" layout:fragment="content">
 
-<h1 style="margin-top: 100px" class="text-center">Update Data</h1>
+<h1 style="margin-top: 100px" class="text-center" th:text="#{update-article-title}">Update Data</h1>
 
 <div class="container">
 
@@ -79,9 +79,9 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.0/js/mdb.min.js"></script>
+</div>
 </body>
 
-<!--    Replace fragment for footer -->
-<div id="div-footer" style=" bottom: 0 ;width: 100%; " th:insert="~{fragment/ajax-fragment :: footer1}"></div>
+
 
 </html>

@@ -6,7 +6,13 @@ INSERT  INTO tb_category(name_category) VALUES ('Scary');
 INSERT  INTO tb_category(name_category) VALUES ('Comedy');
 INSERT  INTO tb_category(name_category) VALUES ('Technology');
 INSERT  INTO tb_category(name_category) VALUES ('IT');
-
+INSERT  INTO tb_category(name_category) VALUES ('Action and adventure');
+INSERT  INTO tb_category(name_category) VALUES ('Alternate history	Autobiograph');
+INSERT  INTO tb_category(name_category) VALUES ('Chick lit	Book review');
+INSERT  INTO tb_category(name_category) VALUES ('Children''s	Cookbook');
+INSERT  INTO tb_category(name_category) VALUES ('Comic book	Diary');
+INSERT  INTO tb_category(name_category) VALUES ('Coming-of-age	Dictionary');
+INSERT  INTO tb_category(name_category) VALUES ('Crime');
 
 -- For Article Table
 

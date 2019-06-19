@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Catagory</title>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layout_home.html}">
 
-    <th:block th:insert="~{fragment/link}"> </th:block>
-
-
-</head>
 <body>
-<div class="main" style="min-height: 650px">
-<div id="replace" th:replace="~{fragment/ajax-fragment :: header}"></div>
-<h3 th:unless="${#lists.isEmpty(categories)==false}" th:text="#{null-text}"></h3>
+
+<div class="main" style="min-height: 650px" layout:fragment="content">
+    <h1 class="text-center " style="margin-top: 100px" th:text="#{category-list}"> Category List</h1>
+
+    <h3 th:unless="${#lists.isEmpty(categories)==false}" th:text="#{null-text}"></h3>
 
 <div class="container" style="margin-top: 5%">
 
     <a th:href="@{/category/add}" class="btn btn-green" th:text="#{add-text}">ADD</a>
 
     <table class="table" th:if="${#lists.isEmpty(categories)==false}">
-        <thead class=" pink text-white">
+        <thead class="  cyan text-white">
         <tr>
             <th scope="col" th:text="#{id-text}">ID</th>
             <th scope="col" th:text="#{title-text}">Title</th>
@@ -28,7 +26,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="category ,articleSta : ${categories}" th:object="${category}">
+        <tr th:each="category ,articleSta : ${categoriesPage}" th:object="${category}">
             <td th:text="*{idCatagory}"></td>
             <td th:text="*{nameCatagory}"></td>
                             <td>
@@ -38,6 +36,44 @@
         </tr>
         </tbody>
     </table>
+
+
+    <!--        Pagination part-->
+
+    <nav aria-label="Page">
+        <ul class="pagination pagination-circle pg-blue justify-content-center "
+            th:if="${#lists.isEmpty(categories)==false}">
+            <li class="page-item  ">
+                <a class="page-link" th:href="@{/category/viewAll(page=1,limit=10)}" th:text="#{first-page}">First</a>
+            </li>
+            <li class="page-item ">
+                <a class="page-link" aria-label="Previous"
+                   th:href="@{/category/viewAll(page=${currentPageCategory}-1,limit=10)}">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only" th:text="#{previous-page}">Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="i :${#numbers.sequence(1,totalPageCategory)}"
+                th:class="(${currentPageCategory}==${i})? 'page-item active' : 'page-item'">
+                <a class="page-link" th:text="${i}" th:href="@{/category/viewAll(page = ${i},limit=10)}">1</a>
+            </li>
+
+            <li class="page-item ">
+                <a class="page-link" aria-label="Next"
+                   th:href="@{/category/viewAll(page=${currentPageCategory}+1,limit=10)}">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only" th:text="#{next-page}">Next</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{/category/viewAll(page=${totalPageCategory} ,limit=10)}"
+                   th:text="#{last-page}">Last</a></li>
+        </ul>
+
+    </nav>
+
+
 </div>
 </div>
 </body>

@@ -1,18 +1,18 @@
 package com.example.demo.model;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class Article {
-
+    int id;
     @NotEmpty
     private String aurthor;
     @NotEmpty
     private String title;
-
     private String description;
     private String thumnail;
-    int id;
-
+    @NotNull
     private Catagory catagory;
 
     public Article() {

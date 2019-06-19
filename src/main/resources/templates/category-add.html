@@ -1,24 +1,17 @@
-
-
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layout_home.html}">
 
-    <th:block th:insert="~{fragment/link}"> </th:block>
-
-</head>
 <body>
-<div class="main" style="min-height: 600px">
 
-<!--Replace  fragment for header -->
-<div th:replace="fragment/ajax-fragment :: header1">
-
-</div>
+<div class="main" style="min-height: 650px" layout:fragment="content">
 
 <div class="container " style="margin-top: 100px">
 
-    <h1 class="text-center" th:text="#{add-article-title}">Add Data</h1>
+    <h1 class="text-center" th:text="#{add-category}">Add Data</h1>
 
     <form action="/category/add" method="post"  th:object="${category}">
 

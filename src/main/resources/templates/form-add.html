@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layout_home.html}">
 
-    <th:block th:insert="~{fragment/link}"></th:block>
-
-</head>
 <body>
-<div class="main" style="min-height: 650px">
-<!--Replace  fragment for header -->
-<div th:replace="fragment/ajax-fragment :: header1">
 
-</div>
+<div class="main" style="min-height: 650px" layout:fragment="content">
 
 <div class="container  " style="margin-top: 100px">
 
@@ -19,24 +15,26 @@
 
     <form action="/add" method="post" enctype="multipart/form-data" th:object="${article}">
 
-        <label for="id" th:text="#{id-text}">ID :</label>
+        <label for="id" th:text="#{id-text}+':'">ID :</label>
         <input class="form-control" type="text" id="id" th:value="*{id}" readonly><br>
-        <label for="title" th:text="#{title-text}">Title :</label> <span style="color: red;"
+        <label for="title" th:text="#{title-text}+':'">Title :</label> <span style="color: red;"
                                                                          th:if="${#fields.hasErrors('title')}"
                                                                          th:text="#{title-error}">Invaled Title</span>
         <input class="form-control" type="text" id="title" th:field="*{title}"><br>
-        <label for="author" th:text="#{article}">Author :</label> <span style="color: red;" th:text="#{author-error}"
+        <label for="author" th:text="#{author-text}+':'">Author : </label> <span style="color: red;" th:text="#{author-error}"
                                                                         th:if="${#fields.hasErrors('aurthor')}">Invaled Author</span>
         <input class="form-control" id="author" th:field="*{aurthor}" type="text"><br>
 
-        <label for="cate">Category</label>
+        <label for="cate" th:text="#{category-text}+':'">Category : </label><span style="color: red;" th:if="${#fields.hasErrors()}"
+                                                  th:text="#{category-error}"></span>
         <select id="cate" class="form-control" th:field="${article.catagory.idCatagory}">
-            <option   value='0' disabled th:text="#{null-text}">
+            <option th:if="${#lists.isEmpty(categories)==true}" value='0' disabled th:text="#{category-null}">
+            <option value='0' disabled th:text="#{category-selected}">
             <option th:each="cate : ${categories}" th:value="${cate.idCatagory}"
                     th:text="${cate.nameCatagory}"></option>
         </select>
         <br>
-        <label for="des" th:text="#{description}">Description :</label>
+        <label for="des" th:text="#{description}+':'">Description :</label>
         <input class="form-control" id="des" th:field="*{description}" type="text"><br>
         <input class="custom-file" id="file-id" name="file" type="file"><br>
 
@@ -86,7 +84,5 @@
 </div>
 </body>
 
-<!--    Replace fragment for footer -->
-<div id="div-footer" style="bottom: 0 ;width: 100%" th:replace="~{fragment/ajax-fragment :: footer1}"></div>
 
 </html>

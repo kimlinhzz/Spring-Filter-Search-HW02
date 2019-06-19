@@ -1,11 +1,12 @@
 package com.example.demo.model;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class Catagory {
 
     private int idCatagory;
-
     @NotEmpty
     private String nameCatagory;
 

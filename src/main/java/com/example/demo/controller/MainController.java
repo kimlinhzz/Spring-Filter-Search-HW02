@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+
 import com.example.demo.model.Article;
 import com.example.demo.model.Catagory;
 import com.example.demo.service.ArticleService.ArticleService;
@@ -43,17 +44,20 @@ public class MainController {
         return "index";
     }
 
+
+    //    Search method
     @GetMapping("/get")
-    public String getBySearch(ModelMap modelMap,@ModelAttribute Article article){
-//        System.out.println(categoryService.findAll() + "hello");
+    public String getBySearch(ModelMap modelMap, @ModelAttribute Article article){
+        boolean isNull = false;
 
         modelMap.addAttribute("tempSearch",article.getTitle());
         if(article.getCatagory().getIdCatagory()>0) {
             modelMap.addAttribute("tempFilter", categoryService.getCatagory(article.getCatagory().getIdCatagory()).getNameCatagory());
         }
+
+
         viewPage(modelMap, 1, 10,article.getCatagory().getIdCatagory(),article.getTitle());
-//        System.out.println("Search"+categoryService.getCatagory(article.getCatagory().getIdCatagory()).getNameCatagory());
-//        System.out.println("bello"+article.getTitle());
+
         return "index";
     }
 
@@ -98,15 +102,15 @@ public class MainController {
         modelMap.addAttribute("article", articleService.getArticle(articleID));
         System.out.println(articleService.getArticle(articleID));
         modelMap.addAttribute("category",categoryService.getCatagory(articleService.getArticle(articleID).getCatagory().getIdCatagory()));
-        System.out.println();
         modelMap.addAttribute("categories", categoryService.findAll());
         return "form-update";
     }
 
     @PostMapping("/update")
-    public String updateData(@Valid @ModelAttribute Article article, BindingResult result, @RequestParam("id") int articleId, @RequestParam("file") MultipartFile file) {
+    public String updateData(@Valid @ModelAttribute Article article, BindingResult result, ModelMap modelMap, @RequestParam("file") MultipartFile file) {
         System.out.println(file.getOriginalFilename());
         if (result.hasErrors()) {
+            modelMap.addAttribute("categories", categoryService.findAll());
             System.out.println("Has Error");
             return "form-update";
         } else {
@@ -150,7 +154,7 @@ public class MainController {
     }
 
     private void viewPage(ModelMap modelMap, int page, int limit,int idSearch,String searchText) {
-
+        boolean isNull = true;
         if (page == 0) {
             page = ArticleServiceImp.lastPage;
         }
@@ -158,17 +162,22 @@ public class MainController {
         if (page > ArticleServiceImp.lastPage) {
             page = 1;
         }
+        if (articleService.showByPagination(page, limit, idSearch, searchText).isEmpty()) {
+            isNull = false;
+        }
+
         Article article = new Article();
         article.setTitle(searchText);
         modelMap.addAttribute("articles", articleService.findAll());
         //TODO Must Check Category Input Again And Imp Search Dynamic Also Filter;
         modelMap.addAttribute("categories",categoryService.findAll());
         modelMap.addAttribute("article",new Article());
-
+        modelMap.addAttribute("isNull", isNull);
         modelMap.addAttribute("articlePage", articleService.showByPagination(page, limit,idSearch,searchText));
         modelMap.addAttribute("currentPage", ArticleServiceImp.currentPage);
         modelMap.addAttribute("totalPage", ArticleServiceImp.lastPage);
-//        modelMap.addAttribute("foundRecord",articleService.)
+
+        System.out.println("checking" + isNull);
     }
     //Fragment
 

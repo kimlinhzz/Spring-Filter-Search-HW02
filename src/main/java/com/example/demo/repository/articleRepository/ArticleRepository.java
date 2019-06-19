@@ -21,8 +21,6 @@ public interface ArticleRepository {
     void delete (int id);
 
 
-//    @Select ("SELECT COUNT(*) FROM tb_article")
-//    int countRecou()
 
     @Select("SELECT  a.id , a.title , a.aurthor , a.description ,a.thumnail , a.category_id , c.name_category" +
             " FROM tb_article a INNER JOIN tb_category c ON a.category_id = c.id_category")

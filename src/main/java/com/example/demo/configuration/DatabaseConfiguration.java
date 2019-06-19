@@ -1,7 +1,7 @@
 package com.example.demo.configuration;
 
 
-import org.apache.ibatis.javassist.ClassPath;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

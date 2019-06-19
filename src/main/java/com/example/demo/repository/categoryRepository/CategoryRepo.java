@@ -1,6 +1,5 @@
 package com.example.demo.repository.categoryRepository;
 
-import com.example.demo.model.Article;
 import com.example.demo.model.Catagory;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;

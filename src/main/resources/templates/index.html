@@ -3,17 +3,11 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layouts/layout-home}">
-<head>
-    <th:block th:insert="~{fragment/link}"></th:block>
+        layout:decorate="~{layouts/layout_home.html}">
 
-</head>
 <body>
 
-<!--    Replace fragment for header -->
-<div id="div-header" class="my-5" th:replace="~{fragment/ajax-fragment :: header1}"></div>
-
-<div class="main" style="min-height: 650px">
+<div class="main" style="min-height: 650px" layout:fragment="content">
     <div class="container">
         <!--Search form-->
         <form action="/get" method="Get" id="search" style="margin-top: 100px;" th:object="${article}">
@@ -32,9 +26,7 @@
                 </select>
 
             </div>
-            <p th:if="${#lists.size(articlePage)} != ${#lists.size(articles)}" class="text-right" style="font-size: 28px;">
-                <span th:text="#{record-text}"></span> <span
-                    class="text-success" th:text="${#lists.size(articlePage)}"></span></p>
+
         </form>
 
     </div>
@@ -63,6 +55,7 @@
             </thead>
 
             <tbody>
+
             <tr th:each="article ,articleSta : ${articlePage}" th:object="${article}">
                 <td th:text="*{id}"></td>
                 <td th:text="*{title}"></td>
@@ -75,7 +68,6 @@
                     <a th:href="@{/formUpdate(id=*{id})}" class="btn btn-blue" th:text="#{update-text}">update</a>
                     <a id="delete" th:href="@{/delete(id=*{id})}" class="btn btn-red"
                        th:text="#{delete-text}">delete</a>
-                    <!--                    <a  id="delete" th:onclick="'javascript:deleting(' + *{id} + ')'"    class="btn btn-red" th:text="#{delete-text}">delete</a>-->
 
                 </td>
             </tr>
@@ -83,7 +75,7 @@
 
             </tbody>
         </table>
-
+        <h3 th:if="(${isNull}==false)" th:text="#{search-null-text}"></h3>
         <!--        Pagination part-->
 
       <nav aria-label="Page">
@@ -159,33 +151,14 @@
 
     </script>
 
-</div>
-<div id="div-footer" style="bottom: 0 ;width: 100%" th:insert="~{fragment/ajax-fragment :: footer1}"></div>
+    <!--</div>-->
+    <!--<div id="div-footer" style="bottom: 0 ;width: 100%" th:insert="~{fragment/ajax-fragment :: footer1}"></div>-->
 
-<!--    Replace fragment for footer -->
+    <!--    Replace fragment for footer -->
+</div>
 </body>
 
 
 </html>
 
-<!--        pagination-->
-<!--        <ul class="pagination pull-right" style="text-align: center; display: block; padding: 20px"-->
-<!--            th:if="${#lists.isEmpty(articles)==false}">-->
-<!--            <li class="page-item"><a th:href="@{/viewAll(page=1,limit=10)}"><i class="material-icons"-->
-<!--                                                                               th:text="#{first-page}">first</i></a>-->
-<!--            </li>-->
-<!--            <li class="page-item"><a th:if="currentPage==1" th:href="@{/viewAll(page=${totalPage},limit=10)}"><i-->
-<!--                    th:text="#{previous-page}" class="material-icons">previous</i></a></li>-->
-<!--            <li class="page-item"><a th:if="${currentPage}>=0" th:href="@{/viewAll(page=${currentPage}-1,limit=10)}"><i-->
-<!--                    th:text="#{previous-page}" class="material-icons">previous</i></a></li>-->
-<!--            <li th:each="i :${#numbers.sequence(1,totalPage)}"-->
-<!--                th:class="(${currentPage}==${i})? 'page-item active' : 'page-item'">-->
-<!--                <a id="active" th:text="${i}" th:href="@{/viewAll(page = ${i},limit=10)}"-->
-<!--                   style="color:black;text-align: center"></a></li>-->
-<!--            <li class="page-item"><a th:href="@{/viewAll(page=${currentPage}+1,limit=10)}"><i class="material-icons"-->
-<!--                                                                                              th:text="#{next-page}">next</i></a>-->
-<!--            </li>-->
-<!--            <li class="waves-effect"><a th:href="@{/viewAll(page=${totalPage} ,limit=10)}"><i class="material-icons"-->
-<!--                                                                                              th:text="#{last-page}">last</i></a>-->
-<!--            </li>-->
-<!--        </ul>-->
+
